@@ -2,6 +2,8 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
+import { Header } from './components/header/header'
+
 const inter = Inter({ 
   subsets: ['latin'],
   variable: '--font-inter',
@@ -17,6 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="pt">
       <body className={inter.variable}>
         <div id='appContainer'>
+          <Header />
           {children}
         </div>
       </body>

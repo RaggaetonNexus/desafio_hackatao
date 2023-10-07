@@ -1,0 +1,16 @@
+.accessibilityBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--accent-color);
+  color: var(--accent-text-color);
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  position: fixed;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+

@@ -2,6 +2,8 @@
   --background-color: #ffffff;
   --text-color: #000000;
   --accent-color: #AC111E;
+
+  --font-size-multiplier: 1;
 }
 
 * {
