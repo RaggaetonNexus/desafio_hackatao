@@ -1,18 +1,71 @@
-import Image from "next/image";
-import type { Metadata } from "next";
+"use client";
+
 import styles from "./page.module.css";
 import Cards from "./components/cards/cards";
+import react ,{ useState, useEffect } from "react";
+import Modal from "./components/modal/modal";
 
-export const metadata: Metadata = {
-  title: "CidadaniaConectada",
-  description:
-    "Um aplicativo que permite a participação cidadã na forma de relatos de problemas e descobrimento de ofertas de serviços públicos.",
+export type ProvedorType = {
+  _id: number;
+  name: string;
 };
+export type ServicetypeType = {
+  _id: number;
+  typename: string;
+};
+export interface Service {
+  _id: number;
+  title: string;
+  description: string;
+  provider: ProvedorType;
+  serviceType: ServicetypeType;
+  status: 'planned' | 'ongoing' | 'finished';
+  dateInit: string;
+  dateEnd?: string;
+  otherArgs?: string[];
+}
 
-export default function Home() {
+
+
+const Home = () => {
+  const [servicos, setServicos] = useState<Service[]>([]);
+  
+  const getServicos = () => {
+    fetch("http://localhost:4000/services/", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+        setServicos(data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
+  useEffect(getServicos, []);
+
   return (
     <main className={styles.main}>
-      <Cards />
+      {
+        <div>
+          {servicos.map((servico) => (
+            <Cards
+              key={servico._id}
+              id={servico._id}
+              title={servico.title}
+              description={servico.description}
+            />
+
+          ))}
+        </div>
+      }
     </main>
   );
 }
+
+ export default Home;

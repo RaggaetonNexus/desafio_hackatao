@@ -22,8 +22,8 @@ const getById = async (req, res, next) => {
 const edit = async (req, res, next) => {
   try {
     let id = req.params.id;
-    let paramtoupdate = req.query.name;
-    const updated = await Request.update({name:paramtoupdate},{where: {_id: id }})
+    let paramtoupdate = req.body;
+    const updated = await Request.update(paramtoupdate , {where: {_id: id }})
     res.status(200).json({ updateComplete: updated > 0 });
   } catch (error) {
     next(error);
@@ -42,9 +42,7 @@ const deleteById = async (req, res, next) => {
 
 const create = async (req, res, next) => {
   try {
-    let request = {
-      name: req.query.name
-    }
+    let request = req.body;
     console.log(request)
     const newRequest = await Request.create(request);
     res.status(201).json(newRequest);

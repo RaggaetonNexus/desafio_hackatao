@@ -1,5 +1,6 @@
 #accessibilityBar {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   background-color: var(--accent-color);
@@ -12,8 +13,9 @@
   top: 0;
   width: 100%;
   z-index: 1000;
-  max-width: 960px;
+  max-width: var(--max-width);
   box-shadow: -100vw -200vw 0px 200vw var(--accent-color);
+  min-height: var(--accessibility-bar-height);
 }
 
 .button {
@@ -24,7 +26,6 @@
   font-size: calc(1rem * var(--font-size-multiplier));
   font-weight: 600;
   text-transform: uppercase;
-  padding: 0.5rem 1rem;
   transition: all 0.2s ease-in-out;
   word-break: break-word;
 }

@@ -7,6 +7,10 @@
 
   --font-size-multiplier: 1;
 
+  --border-radius: 0.5rem;
+
+  --mobile-sidebar-height: 5rem;
+
   --max-width: 1407px;
 }
 
@@ -35,13 +39,8 @@ body, #FontSizeApplyier {
   justify-content: flex-start;
   align-items: center;  
   width: 100%;
-
-
-  --header-height: 3rem;
-
-  --border-radius: 0.5rem;
-
-  --mobile-sidebar-height: 5rem;
+  --accessibility-bar-height: calc(2rem * var(--font-size-multiplier));
+  --header-height: calc(3rem * var(--font-size-multiplier));
 }
 
 #appContainer {

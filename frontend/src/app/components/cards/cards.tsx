@@ -1,20 +1,26 @@
 import styles from "./cards.module.css";
 import Image from "next/image";
+import Link from "next/link";
 
-export default function Cards() {
+interface CardsProps {
+  key: number;
+  id: number;
+  title: string;
+  description: string;
+}
+
+const Cards: React.FC<CardsProps> = ({ id, title, description }) => {
   return (
-    <div className={styles.card}>
-      {/* <div className={styles.card__image}>
-        <Image src="/next.svg" alt="img" width={128} height={128} />
-      </div> */}
+    <div className={styles.card} >
+      <h3>{title}</h3>
       <div className={styles.card__content}>
-        <h3>Card Title</h3>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
-          voluptatum.
-        </p>
-        <button className={styles.button}>Click</button>
+        <p>{description}</p>
+        <Link href={{
+          pathname: '/servico/'+id,
+        }}  className={styles.button}>Detalhes</Link>
       </div>
     </div>
   );
 }
+
+ export default Cards;

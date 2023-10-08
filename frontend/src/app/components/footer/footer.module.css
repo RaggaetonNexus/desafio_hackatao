@@ -1,6 +1,6 @@
 #footer {
   background-color: var(--accent-color);
-  padding: 5px;
+  padding: 0.5rem;
   text-align: center;
   clear: both;
   width: 100%;
@@ -21,12 +21,17 @@
   width: 100%;
   font-weight: 600;
   font-size: calc(1rem * var(--font-size-multiplier));
-  padding-bottom: calc(var(--mobile-sidebar-height) * 2);
+  padding-bottom: var(--mobile-sidebar-height);
 }
 
 .secaoLinks {
   color: var(--text-color);
   padding-bottom: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .links {

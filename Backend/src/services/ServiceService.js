@@ -21,6 +21,22 @@ const getAll = async(req, res, next) => {
   }
 }
 
+const getOne = async(req, res, next) => {
+  try {
+    let id = req.params.id;
+    let service = await Service.findByPk(id);
+    let retServ = {...service.dataValues};
+    let provider = service.provider;
+    let type = service.serviceType;
+    retServ.provider = await Provider.findByPk(provider);
+    
+    retServ.serviceType = await ServiceTypes.findByPk(type);
+    res.status(200).json(retServ);
+  } catch (error) {
+    next(error);
+  }
+}
+
 const create = async(req, res, next) => {
   try {
     let reqBody = req.body;
@@ -105,4 +121,4 @@ const finished = async (req, res, next) => {
   }
 }
 
-export default { getAll, create, edit, deleteOne, createServiceType, deleteServiceType, getAllTypes, statusOngoing, finished };
+export { getAll, create, edit, deleteOne, createServiceType, deleteServiceType, getAllTypes, statusOngoing, finished, getOne };

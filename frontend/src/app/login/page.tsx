@@ -23,7 +23,7 @@ export default function Login() {
           placeholder="Digite sua senha"
         />
         <div className={styles.buttonDiv}>
-          <Link href="/home">
+          <Link href="/">
             <button className={styles.button} type="submit">
               Entrar
             </button>

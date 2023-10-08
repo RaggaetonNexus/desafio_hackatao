@@ -1,34 +1,35 @@
 "use client";
 
-import react, { useState, useEffect } from 'react';
+
+import react, { useState, useEffect, useRef } from 'react';
 import styles from "./adicionarServico.module.css";
+import { ProvedorType, ServicetypeType } from '../page'
+import { useRouter } from 'next/navigation';
 
-
-
-type ProvedorType = {
-  _id: number;
-  name: string;
-};
-type ServiceType = {
-  _id: number;
-  typename: string;
-};
 
 export default function NovoServico() {
+  const router = useRouter();
+
   const [nome, setNome] = useState("");
   const [descricao, setDescricao] = useState("");
-  const [novoProvedorAdd, setNovoProvedor] = useState("");
   const [provedor, setProvedor] = useState<ProvedorType>();
   const [provedores, setProvedores] = useState<ProvedorType[]>([]);
-  const [novoTipoAdd, setNovoTipo] = useState("");
-  const [tipo, setTipo] = useState<ServiceType>();
-  const [tipos, setTipos] = useState<ServiceType[]>([]);
+  const [tipo, setTipo] = useState<ServicetypeType>();
+  const [tipos, setTipos] = useState<ServicetypeType[]>([]);
   const [status, setStatus] = useState("");
   const [dataInicial, setDataInicial] = useState("");
   const [dataFinal, setDataFinal] = useState("");
   const [inputVisivel, setInputVisivel] = useState(false);
   const [inputTipoVisivel, setInputTipoVisivel] = useState(false);
-  
+  const novoProvedorRef = useRef<HTMLInputElement>(null);
+  const novoTypeRef = useRef<HTMLInputElement>(null);
+  const [customInputs, setCustomInputs] = useState<{
+    name: string;
+    nameInputRef?: react.RefObject<HTMLInputElement>;
+    type: string;
+    typeInputRef?: react.RefObject<HTMLInputElement>;
+  }[]>([]);
+
   const getProvedores = () => {
     fetch("http://127.0.0.1:4000/providers/", {
       method: "GET",
@@ -57,7 +58,7 @@ export default function NovoServico() {
       .then((response) => response.json())
       .then((data) => {
         console.log("Success:", data);
-        const newTipos = data.map((d: ServiceType) => ({ _id: d._id, typename: d.typename }));
+        const newTipos = data.map((d: ServicetypeType) => ({ _id: d._id, typename: d.typename }));
         setTipos(newTipos);
       })
       .catch((error) => {
@@ -67,8 +68,8 @@ export default function NovoServico() {
   useEffect(getProvedores, []);
   useEffect(getTipos, []);
 
-  
-  const criarNovoProvedor = () => {
+
+  const criarNovoProvedor = (novoProvedorAdd: string) => {
     setInputVisivel(false);
     fetch(`http://127.0.0.1:4000/providers/?name=${novoProvedorAdd}`, {
       method: "POST",
@@ -77,21 +78,21 @@ export default function NovoServico() {
       },
     })
     getProvedores();
-    
+
   }
 
-  function criarNovoTipo(){
+  async function criarNovoTipo(novoTipoAdd: string) {
     setInputVisivel(false);
-    fetch(`http://127.0.0.1:4000/services/types?name=${novoTipoAdd}`, {
+    await fetch(`http://127.0.0.1:4000/services/types?name=${novoTipoAdd}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
     })
     getTipos();
-    
+
   }
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  function handleSubmit(event: react.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const data = {
       title: nome,
@@ -100,7 +101,8 @@ export default function NovoServico() {
       serviceType: tipo?._id,
       status: status,
       dateInit: dataInicial,
-      ...(dataFinal ? {dateEnd: dataFinal} : {})
+      ...(dataFinal ? { dateEnd: dataFinal } : {}),
+      otherArgs: customInputs.map((customInput) => customInput.name),
     };
     console.log(data);
     fetch("http://127.0.0.1:4000/services/", {
@@ -113,13 +115,14 @@ export default function NovoServico() {
       .then((response) => response.json())
       .then((data) => {
         console.log("Success:", data);
+        router.push('/')
       })
       .catch((error) => {
         console.error("Error:", error);
       });
   }
 
- 
+
 
   const toggleInput = () => {
     setInputVisivel(!inputVisivel);
@@ -128,8 +131,8 @@ export default function NovoServico() {
     setInputTipoVisivel(!inputTipoVisivel);
   };
 
- 
-  
+
+
   return (
     <div className={styles.div}>
       <h1 className={styles.h1}>Adicionar serviço</h1>
@@ -162,6 +165,7 @@ export default function NovoServico() {
                 name="provedor"
                 value={p._id}
                 onChange={() => setProvedor(p)}
+                className={styles.valueTextInput}
               />
               {p.name}
             </label>
@@ -169,13 +173,13 @@ export default function NovoServico() {
         </>
 
 
-      <button type='button' onClick={toggleInput}>Adicionar novo provedor</button>
-      {inputVisivel && (
-        <div>
-          <input onChange={(event) => setNovoProvedor(event.target.value)} type="text" placeholder="Digite o novo provedor" />
-          <input type='button' onClick={criarNovoProvedor} value={"Enviar"} />
-        </div>
-      )}
+        <button type='button' onClick={toggleInput}>Adicionar novo provedor</button>
+        {inputVisivel && (
+          <div>
+            <input ref={novoProvedorRef} type="text" placeholder="Digite o novo provedor" />
+            <input type='button' onClick={() => { criarNovoProvedor('' + novoProvedorRef.current?.value) }} value={"Enviar"} />
+          </div>
+        )}
 
         <label className={styles.label}>Selecione o tipo do serviço</label>
         <>
@@ -185,24 +189,24 @@ export default function NovoServico() {
                 type="radio"
                 name="tipo"
                 value={p._id}
-                onChange={() => {setTipo(p)}}
+                onChange={() => { setTipo(p) }}
               />
               {p.typename}
             </label>
           ))}
         </>
-        
-        <button onClick={toggleInputType}>Adicionar novo tipo de serviço</button>
-        {inputTipoVisivel && (
-        <div>
-          <input onChange={(event) => setNovoTipo(event.target.value)} type="text" placeholder="Digite o novo tipo" />
-          <button onClick={() => {criarNovoTipo()}} >Enviar</button>
-        </div>
-      )}
 
-      
-      <label className={styles.label}>Status do serviço</label>
-      
+        <button type='button' onClick={toggleInputType}>Adicionar novo tipo de serviço</button>
+        {inputTipoVisivel && (
+          <div>
+            <input ref={novoTypeRef} type="text" placeholder="Digite o novo tipo" />
+            <button onClick={() => { criarNovoTipo('' + novoTypeRef.current?.value) }} type='button' >Enviar</button>
+          </div>
+        )}
+
+
+        <label className={styles.label}>Status do serviço</label>
+
         <form>
           <input
             type="checkbox"
@@ -251,6 +255,30 @@ export default function NovoServico() {
           value={dataFinal}
           onChange={(event) => setDataFinal(event.target.value)}
         />
+
+        <div>
+          <h3>Campos customizados do serviço:</h3>
+          {customInputs.map((customInput, index) => (
+            <div key={index}>
+              <label>Nome do campo:</label>
+              <input ref={customInput.nameInputRef} type='text' onChange={(event) => {
+                const newCustomInputs = [...customInputs];
+                newCustomInputs[index] = { ...customInput, name: event.target.value };
+                setCustomInputs(newCustomInputs);
+              }} />
+              <label>Tipo do campo:</label>
+              <input ref={customInput.typeInputRef} type='text' onChange={(event) => {
+                const newCustomInputs = [...customInputs];
+                newCustomInputs[index] = { ...customInput, type: event.target.value };
+                setCustomInputs(newCustomInputs);
+              }} />
+            </div>
+          ))}
+
+          <button type='button' onClick={() => {
+            setCustomInputs([...customInputs, { name: '', type: '' }])
+          }}>+</button>
+        </div>
 
         <div className={styles.buttonDiv}>
           <button className={styles.button} type="submit">

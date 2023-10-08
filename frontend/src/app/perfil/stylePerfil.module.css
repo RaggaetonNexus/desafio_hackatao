@@ -3,6 +3,7 @@
   flex-wrap: wrap;
   flex-direction: column;
   gap: 10px;
+  height: 60vh
 }
 
 .wrapper {
@@ -156,6 +157,8 @@
   animation-timing-function: ease-in-out;
 
 }
+
+/* # */
 
 
 

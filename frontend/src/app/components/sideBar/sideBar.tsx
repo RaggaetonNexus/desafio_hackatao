@@ -8,11 +8,11 @@ export default function SideBar() {
         <ul className={styles.ul}>     
               <Link className={styles.link} href="/">Início</Link>
               <Link className={styles.link} href="/perfil">Perfil</Link>
-              <p className={styles.p}>-- Recursos Admin --</p>
+              <p className={styles.p}><div className={styles.line}/><span>Recursos Admin</span><div className={styles.line}/></p>
               <Link className={styles.link} href="/adicionarServico">Adicionar Serviço</Link>
               <Link className={styles.link} href="/reclamacoes">Visualizar Requisições</Link>
         </ul>
         
     </nav>
-  );
+  );  
 }

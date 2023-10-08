@@ -29,14 +29,14 @@ export default function Cadastro() {
         />
 
         <div className={styles.cadastroButtons}>
-          <Link href="/">
-            <button className={styles.button} type="submit">
-              Cadastrar
-            </button>
-          </Link>
           <Link href="/login">
             <button className={styles.button} type="submit">
               Login
+            </button>
+          </Link>
+          <Link href="/">
+            <button className={styles.button} type="submit">
+              Cadastrar
             </button>
           </Link>
         </div>

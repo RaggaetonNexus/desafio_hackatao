@@ -1,0 +1,40 @@
+/* styles.module.css */
+.servico{
+    text-align: default;
+    width: 100%;
+
+}
+.conteudo {
+  text-align: left; /* Alinhe o texto à esquerda */
+  width: 100%;
+  border: 1px solid black;
+  padding: 2rem;
+}
+.p{
+  font-size: 1.3rem;
+}
+
+.button{
+  
+}
+  
+  
+  .conteudo label {
+    font-weight: bold; /* Deixa os rótulos em negrito */
+  }
+  
+  .conteudo div {
+    margin-top: 10px; /* Adicione espaço entre os elementos div */
+  }
+  
+  .conteudo button {
+    background-color: #007bff; /* Cor de fundo do botão */
+    color: white; /* Cor do texto do botão */
+    padding: 10px 20px; /* Espaçamento interno do botão */
+    border: none; /* Remova a borda do botão */
+    cursor: pointer; /* Mude o cursor ao passar sobre o botão */
+  }
+  
+  .conteudo button:hover {
+    background-color: #0056b3; /* Cor de fundo ao passar o mouse sobre o botão */
+  }

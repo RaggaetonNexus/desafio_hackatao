@@ -4,8 +4,8 @@ import { getAll, getById, create, edit, deleteById } from '../services/RequestSe
 const router = express.Router();
 
 router.get('/', getAll);
-router.get('/:id', getById);
 router.post('/', create);
+router.get('/:id', getById);
 router.put('/:id', edit);
 router.delete('/:id', deleteById);
 

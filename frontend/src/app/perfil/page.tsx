@@ -6,9 +6,9 @@ export default function Perfil() {
    return(
     
     <div className={styles.drapper}>
-        <h1 id={styles.titulo}> Bem vindo, usuario!</h1>
+        <h1 id={styles.titulo}> Bem vindo!</h1>
     
-        <div className={styles.wrapper}>           
+        {/* <div className={styles.wrapper}>           
             <div className={styles.container}>
                 <div className={styles.imagemPerfil}>
                     <Image
@@ -19,7 +19,7 @@ export default function Perfil() {
                     />
                 </div>    
             </div>   
-        </div>
+        </div> */}
         <div className={styles.contentDiv}>
             <div className={styles.dadosCidadaoDiv}>
                 <h3>Seus dados</h3>
@@ -49,11 +49,5 @@ export default function Perfil() {
 
 
     </div>    
-    
-    
-   
    ) 
-    
-
-  
 }

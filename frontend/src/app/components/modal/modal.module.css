@@ -1,0 +1,97 @@
+#modalContainer {
+  position: fixed;
+  top: var(--accessibility-bar-height);
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  height: calc(100% - var(--accessibility-bar-height));
+  background-color: rgba(0,0,0,0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+#modalContainer.open {
+  display: flex;
+}
+
+#modalItem {
+  margin: auto;
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  border: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+#inputAreas {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+#closeModalButton {
+  margin-left: auto;
+  width: calc(1rem * var(--font-size-multiplier));
+  height: calc(1rem * var(--font-size-multiplier));
+  border-radius: 50%;
+  border: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-top: -0.5rem;
+  margin-right: -0.5rem;
+  cursor: pointer;
+  background: transparent;
+}
+
+#closePart {
+  position: absolute;
+  width: 100%;
+  height: 25%;
+  background-color: var(--text-color);
+  transform: rotate(45deg);
+  border-radius: 100vmax;
+  transition: transform 0.2s ease-in-out, background 0.2s ease-in-out;
+}
+
+#closePart:nth-child(2) {
+  transform: rotate(-45deg);
+}
+
+#closeModalButton:hover #closePart {
+  transform: rotate(-45deg);
+  background: var(--accent-color);
+}
+
+#closeModalButton:hover #closePart:nth-child(2) {
+  transform: rotate(225deg);
+}
+
+.modalButton {
+  width: 100%;
+  border-radius: var(--border-radius);
+  border: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  cursor: pointer;
+  padding: 0.5rem;
+  font-size: calc(1rem * var(--font-size-multiplier));
+  transition: filter 0.2s ease-in-out;
+}
+
+.modalButton:hover {
+  filter: brightness(0.5);
+}
+
+.modalButton.mainAction {
+  background-color: var(--accent-color);
+  color: var(--background-color);
+}

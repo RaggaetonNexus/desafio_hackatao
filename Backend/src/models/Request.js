@@ -4,6 +4,11 @@ import Service from "./Service.js";
 import User from "./User.js";
 
 const Request = sequelize.define('request', {
+  _id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  },
   service: {
     type: DataTypes.INTEGER,
     references: {
@@ -29,8 +34,8 @@ const Request = sequelize.define('request', {
     },
     allowNull: false
   },
-  address: {
-    type: DataTypes.STRING
+  optionalArgs: {
+    type: DataTypes.ARRAY(DataTypes.STRING),
   }
 
 });

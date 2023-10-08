@@ -15,6 +15,7 @@ import serviceRouter from './routes/serviceRouter.js';
 import providerRouter from './routes/providerRouter.js'
 import loginRouter from './routes/loginRouter.js';
 import requestRouter from './routes/requestRouter.js';
+import userRouter from './routes/userRouter.js';
 
 export const dataInputTypes = ['text', 'date', 'cpf', 'number'];
 
@@ -33,10 +34,11 @@ app.use(urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors());
 
-app.use('/services', serviceRouter);
-app.use('/providers', providerRouter);
 app.use('/', loginRouter);
+app.use('/services', serviceRouter);
 app.use('/request', requestRouter);
+app.use('/providers', providerRouter);
+app.use('/user', userRouter);
 
 app.use((err, req, res, next) => {
   res.status(404).send(err.message);

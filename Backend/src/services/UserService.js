@@ -48,9 +48,7 @@ const deleteById = async (req, res, next) => {
 
 const create = async (req, res, next) => {
   try {
-    let user = {
-      name: req.query.name
-    }
+    let user = req.body;
     console.log(user)
     const newUser = await User.create(user);
     res.status(201).json(newUser);

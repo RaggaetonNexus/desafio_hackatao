@@ -39,11 +39,11 @@ const Service = sequelize.define('service', {
     allowNull: false
   },
   dateInit: {
-    type: DataTypes.DATE,
+    type: DataTypes.STRING,
     allowNull: false,
   },
   dateEnd: {
-    type: DataTypes.DATE
+    type: DataTypes.STRING
   },
   otherArgs: {
     type: DataTypes.ARRAY(DataTypes.STRING)

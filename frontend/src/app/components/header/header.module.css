@@ -4,11 +4,20 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  margin-left:25px;
   height: var(--header-height);
   padding: 1rem;
   background: var(--header-color);
   box-shadow: -100vw -200vw 0px 200vw var(--header-color);
+  max-width: var(--max-width);
 }
+
+@media screen and (min-width: 665px){
+  #mainHeader{
+    margin-left: 0;
+  }
+}
+
 
 .direita {
   display: flex;

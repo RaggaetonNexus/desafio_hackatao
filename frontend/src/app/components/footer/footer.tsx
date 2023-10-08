@@ -13,7 +13,7 @@ export default function Footer() {
       <footer className={styles.footerTexto}>
         <Image
           className={styles.Imagens}
-          src={"/footericon.png"}
+          src={"/logocz.png"}
           width={100}
           height={100}
           alt="prefeitura"
