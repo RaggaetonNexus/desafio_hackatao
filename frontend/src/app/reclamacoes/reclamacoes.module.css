@@ -1,0 +1,39 @@
+.dashboard {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.reclamacoes,
+.ofertas {  
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 16px;
+    margin: 16px;
+    width: 40rem;
+    font-size: calc(1rem * var(--font-size-multiplier));
+    border: 1px solid #000;
+}
+
+.cardsDashboard {
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: .5rem;
+    margin: .5rem;
+    padding: 1rem;
+}
+
+.dashboard h1 {
+    font-size: calc(1rem * var(--font-size-multiplier));
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: var(--text-color);
+}
+
+.dashboard p {
+    font-size: calc(1rem * var(--font-size-multiplier));
+    font-weight: 400;
+    margin-bottom: 2rem;
+    color: var(--text-color);
+}

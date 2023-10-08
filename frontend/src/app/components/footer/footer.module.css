@@ -1,0 +1,40 @@
+#footer {
+  background-color: var(--accent-color);
+  padding: 5px;
+  text-align: center;
+  clear: both;
+  width: 100%;
+  height: 100%;
+  display: flex;
+
+  flex-direction: column;
+  align-items: stretch;
+  align-content: stretch;
+  justify-content: flex-start;
+}
+
+.footerTexto {
+  background: var(--header-color);
+  height: 100%;
+  padding: 5px;
+  color: var(--text-color);
+  width: 100%;
+  font-weight: 600;
+  font-size: calc(1rem * var(--font-size-multiplier));
+  padding-bottom: calc(var(--mobile-sidebar-height) * 2);
+}
+
+.secaoLinks {
+  color: var(--text-color);
+  padding-bottom: 2rem;
+}
+
+.links {
+  padding: 20px;
+  color: var(--text-color);
+}
+
+.Imagens {
+  text-align: center;
+  object-fit: scale-down;
+}

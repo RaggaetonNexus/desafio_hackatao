@@ -1,0 +1,30 @@
+#accessibilityBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--accent-color);
+  color: var(--accent-text-color);
+  padding: 0.5rem 1rem;
+  font-size: calc(0.8rem * var(--font-size-multiplier));
+  font-weight: 600;
+  text-transform: uppercase;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  max-width: 960px;
+  box-shadow: -100vw -200vw 0px 200vw var(--accent-color);
+}
+
+.button {
+  background-color: transparent;
+  border: none;
+  color: var(--accent-text-color);
+  cursor: pointer;
+  font-size: calc(1rem * var(--font-size-multiplier));
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  transition: all 0.2s ease-in-out;
+  word-break: break-word;
+}

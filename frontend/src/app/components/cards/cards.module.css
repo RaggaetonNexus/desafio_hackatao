@@ -1,0 +1,78 @@
+.card {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: cadetblue;
+    display: inline-block;
+    margin: 2rem;
+    width: 20rem;
+    text-align: center;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.card__image {
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+.card__content {
+    color: white;
+    background-color: var(--accent-color);
+    padding: 1rem;
+    font-size: calc(1rem * var(--font-size-multiplier));
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.button {
+    background-color: #fff;
+    border: 1px solid #000;
+    border-radius: .5rem;
+    color: #000;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: .5rem 1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: calc(1rem * var(--font-size-multiplier));
+    width: 100px;
+    margin: 0 auto;
+}
+
+.button:hover {
+    background-color: var( --header-color);
+    border: 1px solid white;   
+    animation-duration: 2s;
+    animation-name: mover;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+
+}
+
+@keyframes mover{
+		
+	
+	25%{
+        transform: rotate(5eg);
+    }
+
+	50%{
+		transform: rotate(0deg);
+	}
+
+	75%{
+		transform: rotate(-5deg);
+	}
+
+  100%{
+    transform: rotate(0deg);
+  }
+}
+

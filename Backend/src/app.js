@@ -1,104 +1,57 @@
-import createError from 'http-errors';
 import express, { json, urlencoded } from 'express';
+import { Logger } from '@promisepending/logger.js';
 import cookieParser from 'cookie-parser';
-import logger from 'morgan';
 import cors from 'cors';
-import debug from 'debug';
+import Service from './models/Service.js';
+import Provider from './models/Provider.js';
+import ServiceTypes from './models/serviceTypes.js';
+import Request from './models/Request.js';
+import User from './models/User.js';
 
+var port = process.env.PORT || 4000;
 
 //routers
-import indexRouter from './routes/index.js';
+import serviceRouter from './routes/serviceRouter.js';
+import providerRouter from './routes/providerRouter.js'
+import loginRouter from './routes/loginRouter.js';
+import requestRouter from './routes/requestRouter.js';
+
+export const dataInputTypes = ['text', 'date', 'cpf', 'number'];
 
 var app = express();
 
 // view engine setup
-app.use(logger('dev'));
+const logger = new Logger({
+  prefix: 'backend',
+  debug: true,
+  coloredBackground: true,
+  allLineColored: true,
+})
+
 app.use(json());
 app.use(urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors());
 
-//using routers
-app.use('/', indexRouter);
+app.use('/services', serviceRouter);
+app.use('/providers', providerRouter);
+app.use('/', loginRouter);
+app.use('/request', requestRouter);
 
+const isDev = process.env.NODE_ENV === 'development'
 
+ServiceTypes.sync({ alter: isDev, force: false });
+Service.sync({ alter: isDev });
+Provider.sync({ alter: isDev });
+Request.sync({alter: isDev});
+User.sync({alter: isDev});
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
-
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.json({
-    error: err.message
+try{
+  app.listen(port, () => {
+    logger.info(`listening in port: ${port}`);
   });
-});
-
-import { createServer } from 'http';
-
-var port = normalizePort(process.env.PORT || '4000');
-app.set('port', port);
-
-var server = createServer(app);
-
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
-
-console.log("listening in port: "+port);
-
-function normalizePort(val) {
-  var port = parseInt(val, 10);
-
-  if (isNaN(port)) {
-    // named pipe
-    return val;
-  }
-
-  if (port >= 0) {
-    // port number
-    return port;
-  }
-
-  return false;
+}catch(err){
+  console.log(err.message);
 }
 
-function onError(error) {
-  if (error.syscall !== 'listen') {
-    throw error;
-  }
 
-  var bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
-
-  switch (error.code) {
-    case 'EACCES':
-      console.error(bind + ' requires elevated privileges');
-      process.exit(1);
-      break;
-    case 'EADDRINUSE':
-      console.error(bind + ' is already in use');
-      process.exit(1);
-      break;
-    default:
-      throw error;
-  }
-}
-
-function onListening() {
-  var addr = server.address();
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
-  debug('Listening on ' + bind);
-}
-
-export default app;

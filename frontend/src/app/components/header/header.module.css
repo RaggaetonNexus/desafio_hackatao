@@ -1,16 +1,41 @@
-.accessibilityBar {
+#mainHeader {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--accent-color);
-  color: var(--accent-text-color);
-  padding: 0.5rem 1rem;
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  position: fixed;
-  left: 0;
   width: 100%;
-  z-index: 1000;
+  height: var(--header-height);
+  padding: 1rem;
+  background: var(--header-color);
+  box-shadow: -100vw -200vw 0px 200vw var(--header-color);
+}
+
+.direita {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#serviceLogoContainer {
+  height: 100%;
+  aspect-ratio: 16/9;
+}
+
+#serviceLogoContainer img {
+  height: 100%;
+  object-fit: contain;
+}
+
+.buttonDireita {
+  padding: .5rem 1rem;
+  margin-left: 1rem;
+  color: var(--accent-text-color);
+  background: var(--accent-color);
+  font-weight: 600;
+  font-size: calc(1rem * var(--font-size-multiplier));
+  text-decoration: none;
+  border-radius: .5rem;
+  border: 0;
+  cursor: pointer;
 }
 

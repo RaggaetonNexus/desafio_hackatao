@@ -1,27 +1,36 @@
-import './globals.css'
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+'use client';
 
-import { Header } from './components/header/header'
+import './globals.css'
+import { Inter } from 'next/font/google'
+import VLibras from './components/vLibras/vLibras';
+
+import Header from './components/header/header'
+import Footer from './components/footer/footer'
+import SideBar from './components/sideBar/sideBar';
+import AccessibilityBar from './components/accessibilityBar/accessibilityBar';
+import { FontSizeProvider } from './components/fontSizeProvider/fontSizeProvider';
 
 const inter = Inter({ 
   subsets: ['latin'],
   variable: '--font-inter',
 });
 
-export const metadata: Metadata = {
-  title: 'CidadaniaConectada',
-  description: 'Um aplicativo que permite a participação cidadã na forma de relatos de problemas e descobrimento de ofertas de serviços públicos.',
-}
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt">
       <body className={inter.variable}>
-        <div id='appContainer'>
+        <FontSizeProvider>
+          <VLibras/>
+          <AccessibilityBar />
           <Header />
-          {children}
-        </div>
+          <div id='appContainer'>
+            <SideBar/>   
+            <div id='pageContainer'>
+              {children}
+            </div>
+          </div>
+          <Footer />
+        </FontSizeProvider>
       </body>
     </html>
   )

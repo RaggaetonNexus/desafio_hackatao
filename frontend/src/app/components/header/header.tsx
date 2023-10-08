@@ -1,16 +1,19 @@
-import styles from './header.module.css';
+import Link from "next/link";
+import styles from "./header.module.css";
+import Image from "next/image";
 
-export function Header() {
-    return (
-        <header>
-            <div className={styles.accessibilityBar}>
-                <button>Contraste</button>
-                <button>Aumentar Fonte</button>
-                <button>Diminuir Fonte</button>
-                <button>Libras</button>
-            </div>
+export default function Header() {
+  return (
+    <header id={styles.mainHeader}>
+      <div className={styles.esquerda}>
+        <div id={styles.serviceLogoContainer}>
+          <Image className={styles.logo} src="/logocz.png" alt="Logo" width={128} height={128}/>
+        </div>
+      </div>
 
-            
-        </header>
-    )
+      <div className={styles.direita}>
+        <Link href="/login"><button className={styles.buttonDireita}>Sair</button></Link>
+      </div>
+    </header>
+  );
 }
