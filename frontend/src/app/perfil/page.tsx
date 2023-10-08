@@ -5,31 +5,24 @@ import Image from 'next/image'
 export default function Perfil() {
    return(
     
-    <div>
-
-        <h1 id={styles.titulo}> Bem vindo, usuario</h1>
+    <div className={styles.drapper}>
+        <h1 id={styles.titulo}> Bem vindo, usuario!</h1>
     
         <div className={styles.wrapper}>           
-            
-
             <div className={styles.container}>
-
                 <div className={styles.imagemPerfil}>
-
                     <Image
                     src= {'/next.svg'}
-                    width={300}
-                    height={300}
+                    width={150}
+                    height={150}
                     alt='prefeitura'
-
-
                     />
                 </div>    
             </div>   
         </div>
         <div className={styles.contentDiv}>
             <div className={styles.dadosCidadaoDiv}>
-                <h3>Dados do Cidadão</h3>
+                <h3>Seus dados</h3>
                 <ul className={styles.dadosCidadaoDivUL}>
                     <li className={styles.dadosCidadaoDivLI}>Nome: Mario Ruby on Rails</li>
                     <li className={styles.dadosCidadaoDivLI}>Endereço: Rua da programação não tipada</li>

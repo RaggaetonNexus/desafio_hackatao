@@ -55,6 +55,11 @@
   background-color: var(--accent-color);
 }
 
+.p{
+  padding: 1rem;
+  text-align: center;
+}
+
 @media (max-width: 768px) {
   .nav {
     position: fixed;

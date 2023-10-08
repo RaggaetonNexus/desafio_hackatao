@@ -1,12 +1,18 @@
+.drapper{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .wrapper {
-  height: 300px;
-  width: 300px;
+  height: 150px;
+  width: 150px;
   position: relative;
   margin: auto;
   border: 1px solid black;
   left: 0;
   right: 0;
-  top: 70px;
 }
 
 .container {
@@ -17,10 +23,6 @@
   justify-content: center;
   perspective: 800px;
   perspective-origin: 50%;
-}
-
-#titulo {
-  position: relative;
 }
 
 .listagem {
@@ -59,9 +61,8 @@
 }
 
 #titulo {
+  font-style: italic;
   text-align: center;
-  font-size: 50px;
-  position: relative; top: 50px;
 }
 
 .atributoL:hover{
@@ -74,9 +75,10 @@
 
 .contentDiv{
   display:flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   gap: 20px;
 }
 
@@ -101,7 +103,7 @@
 
 .dadosCidadaoDivLI {
   font-weight: 700;
-  font-size: calc(1.5rem * var(--font-size-multiplier));
+  font-size: calc(1rem * var(--font-size-multiplier));
   
 }
 

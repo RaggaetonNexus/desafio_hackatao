@@ -74,3 +74,13 @@
     background: var(--background-color);
   }
   
+  .frontEnd{
+    display: none;
+  }
+  .hiddenComponentInput{
+    display: none;
+  }
+
+  .hiddenComponentButton{
+    display: none;
+  }

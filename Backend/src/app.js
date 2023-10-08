@@ -38,6 +38,10 @@ app.use('/providers', providerRouter);
 app.use('/', loginRouter);
 app.use('/request', requestRouter);
 
+app.use((err, req, res, next) => {
+  res.status(404).send(err.message);
+});
+
 const isDev = process.env.NODE_ENV === 'development'
 
 ServiceTypes.sync({ alter: isDev, force: false });
